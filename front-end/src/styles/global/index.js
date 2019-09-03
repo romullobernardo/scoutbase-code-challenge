@@ -26,6 +26,7 @@ export default createGlobalStyle`
         text-align: center;
         color: ${setColor.contrast};
         ${setFont.slanted};
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     }
 
     p {
