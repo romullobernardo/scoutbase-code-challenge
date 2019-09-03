@@ -1,3 +1,10 @@
+# NOT FINISHIED YET (FRONT-END IS FINISHED THOUGH)
+
+
+
+
+
+
 # Back-end task of Code Challenge for Scoutbase
 
 This task is for demonstrating your understanding of HTTP, GraphQL, Node.js and general API practices.

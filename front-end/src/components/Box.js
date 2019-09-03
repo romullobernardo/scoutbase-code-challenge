@@ -7,4 +7,5 @@ export default styled.div`
     text-align:center;
     padding: ${setRem(60)} ${setRem(32)};
     color: ${setColor.primaryColor};
+    border-radius: ${setRem(4)};
 `
