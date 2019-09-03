@@ -45,5 +45,12 @@ const setFlex = ({ x='center', y='center' } = {}) =>
         justify-content: ${x};
     `
 
+const setDirection = direc => 
 
-export { setRem, setColor, setFont, setBorder, setTransition, setFlex, setBackground }
+    `
+        ${direc === 'next' ? ' right: 0; span { transform: rotateZ(-90deg); } ' : ''}
+        ${direc === 'prev' ? ' left: 0; span { transform: rotateZ(90deg); } ' : ''}
+    `
+
+
+export { setRem, setColor, setFont, setDirection, setBorder, setTransition, setFlex, setBackground }
