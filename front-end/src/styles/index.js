@@ -1,3 +1,5 @@
+import { css } from 'styled-components'
+
 const setColor =
 {
     primaryColor: '#af9a7d',
@@ -52,5 +54,23 @@ const setDirection = direc =>
         ${direc === 'prev' ? ' left: 0; span { transform: rotateZ(90deg); } ' : ''}
     `
 
+const sizes =
+{
+    large: 1200,
+    desktop: 992,
+    tablet: 768,
+    phone: 576
+}
 
-export { setRem, setColor, setFont, setDirection, setBorder, setTransition, setFlex, setBackground }
+
+const media = Object.keys(sizes).reduce((acc, label) => 
+{
+    acc[label] = (...args) => css`
+        @media (max-width: ${sizes[label] / 16}em) {
+            ${css(...args)}
+        }
+    `
+    return acc
+}, {})
+
+export { media, setRem, setColor, setFont, setDirection, setBorder, setTransition, setFlex, setBackground }
