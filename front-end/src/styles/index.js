@@ -17,6 +17,12 @@ const setFont =
 }
 
 
+const setBackground = ({ img , color = 'rgba(0,0,0,0)'} = {}) => 
+`
+background: linear-gradient(${color}, ${color}), url(${img}) center/ cover fixed no-repeat;
+`
+
+
 const setRem = (number = 16) => 
 
     `${number / 16}rem`
@@ -40,4 +46,4 @@ const setFlex = ({ x='center', y='center' } = {}) =>
     `
 
 
-export { setRem, setColor, setFont, setBorder, setTransition, setFlex }
+export { setRem, setColor, setFont, setBorder, setTransition, setFlex, setBackground }
