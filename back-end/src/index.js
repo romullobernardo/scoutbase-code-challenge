@@ -14,4 +14,4 @@ app.use(query())
 server.applyMiddleware({ app, path })
 
 
-app.listen({ port: 4001 }, () => console.log(`Server listening on 4001`))
+app.listen({ port: 4000 }, () => console.log(`Server listening at http://localhost:4000${server.graphqlPath}`))
