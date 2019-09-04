@@ -3,11 +3,26 @@ import { gql } from 'apollo-server'
 export default gql`
 
     type Movie {
-            _id: ID
-            name: String
+            title: String
+            year: String
+            rating: Float
+            actors: [Actor]
         }
 
+    type Actor {
+        name: String
+        birthday: String
+        country: String
+        directors: [Director]
+    }
+
+    type Director {
+        name: String
+        birthday: String
+        country: String
+    }
+
     type Query {
-        test: Movie
+        movies: [Movie]
     }
 `
