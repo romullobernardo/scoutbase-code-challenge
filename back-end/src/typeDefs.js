@@ -25,11 +25,12 @@ export default gql`
     type User {
         id: ID!
         name: String!
+        password: String!
     }
 
     type Auth {
-        token: String!
-        user: User!
+        token: String
+        user: User
     }
     
     type Query {

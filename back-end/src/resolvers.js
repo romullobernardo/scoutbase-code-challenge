@@ -1,3 +1,5 @@
+import uuid from 'uuid/v4'
+
 const movies =
 [
     {
@@ -56,13 +58,62 @@ const movies =
     },
 ]
 
+const auths =
+[
+    {
+        token: 'aasdf',
+        user:
+        {
+            id: uuid(),
+            name: 'user 1',
+            password: 'abc'
+        }
+    },
+    {
+        token: 'jfsdjf',
+        user:
+        {
+            id: uuid(),
+            name: 'user 2',
+            password: '123'
+        }
+    },
+    {
+        token: 'rtbrb',
+        user:
+        {
+            id: uuid(),
+            name: 'user 3',
+            password: 'adminadmin'
+        }
+    }
+]
+
+
 export default {
     Query: {
         movies: () => movies
     },
     Mutation: {
         createUser(parent, args, ctx, info) {
-            console.log(args)
+            const usernameTaken = auths.some(auth => auth.user.name === args.username)
+
+            if (usernameTaken) throw new Error('Username is taken')
+
+            const auth = 
+            {
+                token: uuid(),
+                user:
+                {
+                    id: uuid(),
+                    name: args.username,
+                    password: args.password
+                }
+            }
+
+            auths.push(auth)
+
+            return auth
         }
     }
 }
