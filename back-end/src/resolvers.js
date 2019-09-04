@@ -59,5 +59,10 @@ const movies =
 export default {
     Query: {
         movies: () => movies
+    },
+    Mutation: {
+        createUser(parent, args, ctx, info) {
+            console.log(args)
+        }
     }
 }

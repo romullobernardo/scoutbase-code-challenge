@@ -22,7 +22,21 @@ export default gql`
         country: String
     }
 
+    type User {
+        id: ID!
+        name: String!
+    }
+
+    type Auth {
+        token: String!
+        user: User!
+    }
+    
     type Query {
         movies: [Movie]
+    }
+
+    type Mutation {
+        createUser(username: String!, password: String!): Auth!
     }
 `
