@@ -58,62 +58,35 @@ const movies =
     },
 ]
 
-const auths =
-[
-    {
-        token: 'aasdf',
-        user:
-        {
-            id: uuid(),
-            name: 'user 1',
-            password: 'abc'
-        }
-    },
-    {
-        token: 'jfsdjf',
-        user:
-        {
-            id: uuid(),
-            name: 'user 2',
-            password: '123'
-        }
-    },
-    {
-        token: 'rtbrb',
-        user:
-        {
-            id: uuid(),
-            name: 'user 3',
-            password: 'adminadmin'
-        }
-    }
-]
-
 
 export default {
     Query: {
-        movies: () => movies
+        loggedInUser: (root, args, { user }) => user,
+        users: (root, args, { user }) =>
+        {
+            if (!user) throw new Error('You are not logged in to access this info')
+            return User.find()
+        }
     },
     Mutation: {
-        createUser(parent, args, ctx, info) {
-            const usernameTaken = auths.some(auth => auth.user.name === args.username)
+        createUser: async (root, { username, password }) => 
+        {
+            const user = User()
+            user.name = username
+            user.password = await bcrypt.hash(password, 12)
+            return user.save()
+        },
+        login: async (root, { username, password }, { SECRET }) => 
+        {
+            const user = await User.findOne({ name: username })
+            if (!user) throw new Error("No user found ")
 
-            if (usernameTaken) throw new Error('Username is taken')
+            const isValid = await bcrypt.compare(password, user.password)
+            if (!isValid) throw new Error("Incorrect password ")
 
-            const auth = 
-            {
-                token: uuid(),
-                user:
-                {
-                    id: uuid(),
-                    name: args.username,
-                    password: args.password
-                }
-            }
+            const token = await jwt.sign({ user: pick(user, ["_id", "username"])}, SECRET, { expiresIn: "1d" })
 
-            auths.push(auth)
-
-            return auth
+            return token
         }
     }
 }
