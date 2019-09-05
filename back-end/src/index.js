@@ -6,7 +6,7 @@ import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
 
 import typeDefs from './typeDefs'
-import resolvers, { users } from './resolvers'
+import resolvers from './resolvers'
 
 const PORT = 4000
 

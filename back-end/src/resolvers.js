@@ -1,4 +1,8 @@
-import uuid from 'uuid/v4'
+import jwt from 'jsonwebtoken'
+import bcrypt from 'bcrypt'
+import User from './models/User'
+import Movies from './models/Movies'
+const pick = require('lodash').pick
 
 const movies =
 [
@@ -66,7 +70,8 @@ export default {
         {
             if (!user) throw new Error('You are not logged in to access this info')
             return User.find()
-        }
+        },
+        movies: () => movies
     },
     Mutation: {
         createUser: async (root, { username, password }) => 
