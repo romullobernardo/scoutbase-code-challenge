@@ -1,5 +1,4 @@
 type Director {
-    id: ID!
     name: String
     birthday: String
     country: String

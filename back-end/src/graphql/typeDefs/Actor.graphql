@@ -1,5 +1,4 @@
 type Actor {
-    id: ID!
     name: String
     birthday: String
     country: String

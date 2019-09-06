@@ -5,7 +5,12 @@ const moviesSchema = new Schema(
 {
     title: String,
     year: Number,
-    rating: Number
+    rating: Number,
+    actors: 
+    {
+        type: Schema.Types.ObjectId,
+        ref: 'Actors'
+    }
 })
     
 export default mongoose.model('Movies', moviesSchema)
