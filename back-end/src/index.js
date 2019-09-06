@@ -8,7 +8,7 @@ import jwt from 'jsonwebtoken'
 import typeDefs from './graphql/typeDefs'
 import resolvers from './resolvers'
 
-const PORT = 4000
+const PORT = process.env.PORT || 4000
 
 dotenv.config()
 
