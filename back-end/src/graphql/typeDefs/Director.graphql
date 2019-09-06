@@ -1,0 +1,10 @@
+type Director {
+    id: ID!
+    name: String
+    birthday: String
+    country: String
+}
+
+type Mutation {
+    createDirectors(name: String!, birthday: String!, country: String!, actor: ID): Director!
+}

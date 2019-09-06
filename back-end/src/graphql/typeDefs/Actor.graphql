@@ -1,0 +1,11 @@
+type Actor {
+    id: ID!
+    name: String
+    birthday: String
+    country: String
+    directors: [Director]
+}
+
+type Mutation {
+    createActors(name: String!, birthday: String!, country: String!, movie: ID): Actor!
+}
