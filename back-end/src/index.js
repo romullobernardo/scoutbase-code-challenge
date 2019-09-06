@@ -1,6 +1,6 @@
 import connect from 'connect'
+import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
-import query from 'qs-middleware'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
@@ -21,7 +21,7 @@ mongoose
 const app = connect()
 const path = '/graphql'
 
-app.use(query())
+app.use(express.json())
 
 const server = new ApolloServer(
 { 
