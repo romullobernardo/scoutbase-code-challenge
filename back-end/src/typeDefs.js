@@ -3,13 +3,15 @@ import { gql } from 'apollo-server-express'
 export default gql`
 
     type Movie {
-            title: String
-            year: String
-            rating: Float
-            actors: [Actor]
-        }
+        id: ID!
+        title: String
+        year: String
+        rating: Float
+        actors: [Actor]
+    }
 
     type Actor {
+        id: ID!
         name: String
         birthday: String
         country: String
@@ -17,6 +19,7 @@ export default gql`
     }
 
     type Director {
+        id: ID!
         name: String
         birthday: String
         country: String
@@ -30,11 +33,13 @@ export default gql`
     type Query {
         loggedInUser: User
         movies: [Movie]
+        moviesDB: [Movie]
         users: [User]
     }
 
     type Mutation {
         createUser(username: String!, password: String!): User!
+        createMovie(title: String!, year: Int!, rating: Float!): Movie!
         login(username: String!, password: String!): String!
     }
 `
