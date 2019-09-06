@@ -103,7 +103,7 @@ export default {
             user.password = await bcrypt.hash(password, 12)
             return user.save()
         },
-        createMovie: async (root, { title, year, rating }) =>
+        createMovie: async (root,{ input: { title, year, rating } }) =>
         {
             const movie = Movies(
             { 
@@ -114,7 +114,7 @@ export default {
  
             return movie.save()
         },
-        createActors: async (root, { name, birthday, country, movie }) =>
+        createActors: async (root, { input: { name, birthday, country, movie } }) =>
         {
             const actor = Actors(
             { 
@@ -125,7 +125,7 @@ export default {
  
             return actor.save()
         },
-        createDirectors: async (root, { name, birthday, country, actor }) =>
+        createDirectors: async (root, {input: { name, birthday, country, actor } }) =>
         {
             const director = Directors(
             { 

@@ -11,6 +11,12 @@ type Query {
     moviesDB: [Movie]
 }
 
+input MoviesInput {
+    title: String!
+    year: Int!
+    rating: Float!
+}
+
 type Mutation {
-    createMovie(title: String!, year: Int!, rating: Float!): Movie!
+    createMovie(input: MoviesInput): Movie!
 }

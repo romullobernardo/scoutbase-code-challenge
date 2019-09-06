@@ -5,6 +5,13 @@ type Director {
     country: String
 }
 
+input DirectorsInput {
+    name: String!
+    birthday: String!
+    country: String! 
+    actor: ID
+}
+
 type Mutation {
-    createDirectors(name: String!, birthday: String!, country: String!, actor: ID): Director!
+    createDirectors(input: DirectorsInput): Director!
 }

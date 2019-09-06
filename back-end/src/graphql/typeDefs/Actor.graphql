@@ -6,6 +6,13 @@ type Actor {
     directors: [Director]
 }
 
+input ActorsInput {
+    name: String!
+    birthday: String!
+    country: String!
+    movie: ID
+}
+
 type Mutation {
-    createActors(name: String!, birthday: String!, country: String!, movie: ID): Actor!
+    createActors(input: ActorsInput): Actor!
 }
