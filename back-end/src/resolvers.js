@@ -2,6 +2,8 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import User from './models/User'
 import Movies from './models/Movies'
+import Actors from './models/Actors'
+import Directors from './models/Directors'
 const pick = require('lodash').pick
 
 const movies =
@@ -111,6 +113,28 @@ export default {
             })
  
             return movie.save()
+        },
+        createActors: async (root, { name, birthday, country, movie }) =>
+        {
+            const actor = Actors(
+            { 
+                name, 
+                birthday, 
+                country
+            })
+ 
+            return actor.save()
+        },
+        createDirectors: async (root, { name, birthday, country, actor }) =>
+        {
+            const director = Directors(
+            { 
+                name, 
+                birthday, 
+                country
+            })
+ 
+            return director.save()
         },
         login: async (root, { username, password }, { SECRET }) => 
         {

@@ -40,6 +40,8 @@ export default gql`
     type Mutation {
         createUser(username: String!, password: String!): User!
         createMovie(title: String!, year: Int!, rating: Float!): Movie!
+        createActors(name: String!, birthday: String!, country: String!, movie: ID): Actor!
+        createDirectors(name: String!, birthday: String!, country: String!, actor: ID): Director!
         login(username: String!, password: String!): String!
     }
 `
