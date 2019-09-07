@@ -8,7 +8,12 @@ type Query {
     users: [User]
 }
 
+type Auth {
+    token: String!
+    user: User!
+}
+
 type Mutation {
-    createUser(username: String!, password: String!): User!
+    createUser(username: String!, password: String!): Auth!
     login(username: String!, password: String!): String!
 }

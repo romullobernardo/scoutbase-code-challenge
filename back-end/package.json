@@ -26,7 +26,6 @@
     "jsonwebtoken": "^8.5.1",
     "merge-graphql-schemas": "^1.7.0",
     "mongoose": "^5.6.12",
-    "nodemon": "^1.19.2",
-    "uuid": "^3.3.3"
+    "nodemon": "^1.19.2"
   }
 }

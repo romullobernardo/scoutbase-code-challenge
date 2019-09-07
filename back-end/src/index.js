@@ -1,9 +1,9 @@
 import connect from 'connect'
 import express from 'express'
-import { ApolloServer } from 'apollo-server-express'
+import { ApolloServer, AuthenticationError } from 'apollo-server-express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
-import jwt from 'jsonwebtoken'
+import { verify } from 'jsonwebtoken'
 
 import typeDefs from './graphql/typeDefs'
 import resolvers from './graphql/resolvers'
@@ -29,25 +29,28 @@ const server = new ApolloServer(
     resolvers,
     context: async ({ req }) => 
     {
-        const token = await req.headers["authentication"]
-        let user
+        const token = req.headers["authentication"] // talvez await
         const SECRET = process.env.SECRET
+
+        // const user = await verify(token, SECRET)
+        let user
 
         try 
         {
-            user = await jwt.verify(token, SECRET)
+            user = await verify(token, SECRET)
             console.log(`${user.user} user`)
         } 
         catch (error) 
         {
+            // throw new AuthenticationError('Authentication token is invalid')
             console.log(`Error: ${error.message}`)
         }
 
-        return { user, SECRET }
+        return { user, SECRET, token }
     }
 })
 
 server.applyMiddleware({ app, path })
 
 
-app.listen({ port: PORT }, () => console.log(`Server listening at http://localhost:${PORT}${server.graphqlPath}`))
+app.listen({ port: PORT }, () => console.log(`🚀  Server listening at http://localhost:${PORT}${server.graphqlPath}`))
