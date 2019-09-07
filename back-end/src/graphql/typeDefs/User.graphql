@@ -15,5 +15,5 @@ type Auth {
 
 type Mutation {
     createUser(username: String!, password: String!): Auth!
-    login(username: String!, password: String!): String!
+    login(username: String!, password: String!): Auth!
 }

@@ -29,24 +29,24 @@ const server = new ApolloServer(
     resolvers,
     context: async ({ req }) => 
     {
-        const token = req.headers["authentication"] // talvez await
+        // const token = req.headers["authentication"] // talvez await
         const SECRET = process.env.SECRET
 
-        // const user = await verify(token, SECRET)
-        let user
+        // // const user = await verify(token, SECRET)
+        // let user
 
-        try 
-        {
-            user = await verify(token, SECRET)
-            console.log(`${user.user} user`)
-        } 
-        catch (error) 
-        {
-            // throw new AuthenticationError('Authentication token is invalid')
-            console.log(`Error: ${error.message}`)
-        }
+        // try 
+        // {
+        //     user = await verify(token, SECRET)
+        //     console.log(`${user.user} user`)
+        // } 
+        // catch (error) 
+        // {
+        //     // throw new AuthenticationError('Authentication token is invalid')
+        //     console.log(`Error: ${error.message}`)
+        // }
 
-        return { user, SECRET, token }
+        return { SECRET }
     }
 })
 
