@@ -1,18 +1,6 @@
-import { sign, decode, verify } from 'jsonwebtoken'
+import { sign } from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import User from '../../models/User'
-const pick = require('lodash').pick
-
-
-// const token = sign({ id: 46 }, 'qwepiuiqewru')
-// console.log(token) 
-
-// const decoded = decode(token)
-// console.log(decoded)
-
-// const verified = verify(token, 'qwepiuiqewru')
-// console.log(verified)
-
 
 
 export default {
@@ -48,14 +36,7 @@ export default {
             // ... LOGGED IN ...
 
 
-            // const token = await jwt.sign({ user: pick(user, ["_id", "username"])}, SECRET, { expiresIn: "1d" })
-            const token = await sign({ user: user.id, name: user.username }, SECRET, { expiresIn: "1d" })
-
-            // const refreshToken = sign({ userId: user.id, count: user.count }, SECRET, { expiresIn: '1d' })
-            // const accessToken = sign({ userId: user.id }, SECRET, {expiresIn: '15min'})
-
-            return user
-            // return token
+           
         }
     }
 }
