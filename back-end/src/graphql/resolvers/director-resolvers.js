@@ -1,12 +1,9 @@
-import Directors from '../../models/Directors'
-
-
 export default {
     Actor: {
-        directors: ({ id }) => Directors.find({ actor : id})
+        directors: ({ id }, args, { Directors }) => Directors.find({ actor : id})
     },
     Mutation: {
-        createDirectors: async (root, {input: { name, birthday, country, actor } }) =>
+        createDirectors: async (root, {input: { name, birthday, country, actor } }, { Directors }) =>
         {
             const director = Directors(
             { 

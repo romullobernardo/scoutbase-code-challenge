@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const moviesSchema = new Schema(
 {
+    scoutbase_rating: String,
     title: String,
     year: Number,
     rating: Number,

@@ -1,19 +1,17 @@
-import { sign } from 'jsonwebtoken'
+import { sign, verify } from 'jsonwebtoken'
 import { compare, hash } from 'bcrypt'
-import User from '../../models/User'
-
 
 export default {
     Query: {
-        // loggedInUser: (root, args, { user }) => user,
-        // users: (root, args, { user }) =>
-        // {
-        //     if (!user) throw new Error('You are not logged in to access this info')
-        //     return User.find()
-        // }
+        loggedInUser: (root, args, { user }) => user,
+        users: (root, args, { user }) =>
+        {
+            if (!user) throw new Error('You are not logged in to access this info')
+            return User.find()
+        }
     },
     Mutation: {
-        createUser: async (root, { username, password }, { SECRET }) => 
+        createUser: async (root, { username, password }, { SECRET, User }) => 
         {
             const user = User()
             user.name = username
@@ -22,10 +20,10 @@ export default {
 
             return {
                 user,
-                token: sign({ userId: user.name }, SECRET)
+                token: sign({ userId: user.name }, SECRET, { expiresIn: '1d' })
             }
         },
-        login: async (root, { username, password }, { SECRET }) => 
+        login: async (root, { username, password }, { SECRET, User }) => 
         {
             // ...
             const user = await User.findOne({ name: username })
@@ -36,9 +34,12 @@ export default {
             // ... LOGGED IN ...
 
 
+
+
+            const { name, id } = user
             return {
                 user,
-                token: sign({ userId: user.id }, SECRET)
+                token: sign({ user: { name, id } }, SECRET, { expiresIn: '1d' })
             }
         }
     }

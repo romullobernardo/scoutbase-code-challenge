@@ -1,0 +1,1 @@
+console.log((Math.random() * (9.0 - 5.0) + 5.0).toFixed(1))

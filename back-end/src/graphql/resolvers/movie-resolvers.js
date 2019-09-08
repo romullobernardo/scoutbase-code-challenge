@@ -1,19 +1,16 @@
-import Movies from '../../models/Movies'
-import Actors from '../../models/Actors'
-
-
 export default {
     Query: {
-        movies: () => Movies.find()
+        movies: (root, args, { Movies }) => Movies.find()
     },
     Movie: {
-        actors: ({ id }) => Actors.find({ movie: id })
+        actors: ({ id }, args, { Actors }) => Actors.find({ movie: id })
     },
     Mutation: {
-        createMovie: async (root,{ input: { title, year, rating } }) =>
+        createMovie: async (root, { input: { title, year, rating } }, { Movies }) =>
         {
             const movie = Movies(
             { 
+                scoutbase_rating: (Math.random() * (9.0 - 5.0) + 5.0).toFixed(1),
                 title, 
                 year, 
                 rating

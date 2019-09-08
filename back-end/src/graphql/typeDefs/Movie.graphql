@@ -1,13 +1,13 @@
 type Movie {
-    title: String
-    year: String
-    rating: Float
-    actors: [Actor]
+    scoutbase_rating: String
+    title: String!
+    year: String!
+    rating: Float!
+    actors: [Actor]!
 }
 
 type Query {
     movies: [Movie]
-    moviesDB: [Movie]
 }
 
 input MoviesInput {
