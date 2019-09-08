@@ -6,8 +6,7 @@ export default {
         loggedInUser: async (root, args, { getUser, req, User, SECRET }) => 
         {
             const userId = await getUser(req, SECRET)
-            console.log('RETURNED: ', userId)
-            return User.findOne({ _id: userId })
+            return userId ? User.findOne({ _id: userId }) : null
         },
         users: (root, args, { User }) => User.find()
     },
@@ -21,7 +20,7 @@ export default {
 
             return {
                 user,
-                token: sign({ userId: user.name }, SECRET, { expiresIn: '10m' })
+                token: sign({ userId: user.name }, SECRET, { expiresIn: '1d' })
             }
         },
         login: async (root, { username, password }, { SECRET, User }) => 
@@ -37,7 +36,7 @@ export default {
             const { name, id } = user
             return {
                 user,
-                token: sign({ user: { name, id } }, SECRET, { expiresIn: '10m' })
+                token: sign({ user: { name, id } }, SECRET, { expiresIn: '1d' })
             }
         }
     }
