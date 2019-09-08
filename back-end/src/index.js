@@ -1,8 +1,7 @@
 import express from 'express'
-import { ApolloServer, AuthenticationError } from 'apollo-server-express'
+import { ApolloServer } from 'apollo-server-express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
-import { verify } from 'jsonwebtoken'
 
 import User from './models/User'
 import Movies from './models/Movies'
@@ -11,6 +10,8 @@ import Directors from './models/Directors'
 
 import typeDefs from './graphql/typeDefs'
 import resolvers from './graphql/resolvers'
+
+import getUser from './utils/getUser'
 
 const PORT = process.env.PORT || 4000
 const path = '/graphql'
@@ -31,18 +32,7 @@ const server = new ApolloServer(
     context: async ({ req }) => 
     {
         const SECRET = process.env.SECRET
-        const token = req && req.headers && req.headers.authorization
-
-        if (token) 
-        {
-            const data = verify(token, SECRET)
-            const user = data.user.name ? await User.findOne({ name: data.user.name }) : null
-            console.log(user)
-
-            return { SECRET, user, Movies, Actors, Directors, User }
-        }
-
-        return { Movies, Actors, Directors, User }
+        return { SECRET, Movies, Actors, Directors, User, getUser, req }
     }
 })
 

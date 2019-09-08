@@ -1,14 +1,15 @@
-import { sign, verify } from 'jsonwebtoken'
+import { sign } from 'jsonwebtoken'
 import { compare, hash } from 'bcrypt'
 
 export default {
     Query: {
-        loggedInUser: (root, args, { user }) => user,
-        users: (root, args, { user }) =>
+        loggedInUser: async (root, args, { getUser, req, User, SECRET }) => 
         {
-            if (!user) throw new Error('You are not logged in to access this info')
-            return User.find()
-        }
+            const userId = await getUser(req, SECRET)
+            console.log('RETURNED: ', userId)
+            return User.findOne({ _id: userId })
+        },
+        users: (root, args, { User }) => User.find()
     },
     Mutation: {
         createUser: async (root, { username, password }, { SECRET, User }) => 
@@ -20,7 +21,7 @@ export default {
 
             return {
                 user,
-                token: sign({ userId: user.name }, SECRET, { expiresIn: '1d' })
+                token: sign({ userId: user.name }, SECRET, { expiresIn: '10m' })
             }
         },
         login: async (root, { username, password }, { SECRET, User }) => 
@@ -33,13 +34,10 @@ export default {
             if (!isValid) throw new Error("Incorrect password")
             // ... LOGGED IN ...
 
-
-
-
             const { name, id } = user
             return {
                 user,
-                token: sign({ user: { name, id } }, SECRET, { expiresIn: '1d' })
+                token: sign({ user: { name, id } }, SECRET, { expiresIn: '10m' })
             }
         }
     }
