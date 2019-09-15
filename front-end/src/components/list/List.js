@@ -8,6 +8,8 @@ import useSliding from './helper/useSliding'
 
 import ListButton from './ListButton'
 
+import { Item } from './Item'
+
 
 export default ({ children }) => 
 {
@@ -61,15 +63,15 @@ const List = styled.div`
     display: flex;
     position: relative;
 
-    .item:hover {
+    ${Item}:hover {
         transform: scale(1.5) !important;
     }
 
-    &:hover .item {
+    &:hover ${Item} {
         transform: translateX(-25%);
     }
 
-    .item:hover ~ .item {
+    ${Item}:hover ~ ${Item} {
         transform: translateX(25%);
     }
 `

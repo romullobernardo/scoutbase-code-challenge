@@ -8,7 +8,6 @@ export default ({ code, children, refProps }) =>
     <Item
         to={`/countries/${code}`} 
         style={{ color: 'black' }}  
-        className='item'
     >
         <ItemInner ref={refProps}>
             {children}
@@ -24,7 +23,7 @@ const ItemInner = styled.div`
     }
 `
 
-const Item = styled(Link)`
+export const Item = styled(Link)`
     background-color: rgba(0,0,0,0.8); 
     border-radius: 4px;
     z-index: 4;
