@@ -1,8 +1,9 @@
 import React from 'react'
 import { setColor, setRem } from '../../styles'
-import { Link } from 'react-router-dom'
 import Context from './context'
 import styled from 'styled-components'
+
+import Item from './Item'
 
 
 export default ({ country: { name, languages, code } }) =>
@@ -11,41 +12,29 @@ export default ({ country: { name, languages, code } }) =>
 
         { ({ elementRef }) => 
         
-            <Link 
-                to={`/countries/${code}`} 
-                style={{ color: 'black' }}  
-                className='item'     
-            > 
-                <Item ref={elementRef}>
-                    <img 
-                        src={`https://www.countryflags.io/${code.toLowerCase()}/shiny/64.png`} 
-                        alt={code}
-                    /> 
-                    <p> {name} </p>
+            <Item 
+                refProps={elementRef}
+                code={code}
+            >
+                <img 
+                    src={`https://www.countryflags.io/${code.toLowerCase()}/shiny/64.png`} 
+                    alt={code}
+                /> 
+                <p> {name} </p>
 
-                    {languages.slice(0, 1).map(language => 
-                        <Languages key={language.name}>
-                            <p> {language.name} </p>
-                            <p> {language.native} </p>
-                        </Languages>
-                    )}
+                {languages.slice(0, 1).map(language => 
+                    <Languages key={language.name}>
+                        <p> {language.name} </p>
+                        <p> {language.native} </p>
+                    </Languages>
+                )}
 
-                </Item>
-            </Link>
+            </Item>
 
         }
 
     </Context.Consumer>
 
-
-const Item = styled.div`
-
-    padding: 10px;
-
-    p {
-        font-size: ${setRem(17)};
-    }
-`
 
 const Languages = styled.div`
     margin-top: 20px;

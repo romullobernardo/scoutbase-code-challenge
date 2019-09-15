@@ -30,13 +30,12 @@ export default ({ children }) =>
 
                 <List>
 
-                    <div 
-                        className="container" 
+                    <Container 
                         ref={containerRef} 
                         {...slideProps}
                     >
                         {children}
-                    </div>
+                    </Container>
 
                 </List>
 
@@ -49,30 +48,18 @@ export default ({ children }) =>
     )
 }
 
+const Container = styled.div`
+    display: flex;
+    padding: 0 55px;
+    transition: transform 300ms ease 100ms;
+    z-index: 3;
+    width: 100%;
+`
 
 const List = styled.div`
 
     display: flex;
     position: relative;
-
-    .container {
-        display: flex;
-        padding: 0 55px;
-        transition: transform 300ms ease 100ms;
-        z-index: 3;
-        width: 100%;
-    }
-
-    .item {
-        background-color: rgba(0,0,0,0.8); 
-        border-radius: 4px;
-        z-index: 4;
-        flex: 0 0 13%;
-        text-align: center;
-        margin: 0 2px;
-        transition: transform 300ms ease 100ms;
-        text-decoration: none;
-    }
 
     .item:hover {
         transform: scale(1.5) !important;
